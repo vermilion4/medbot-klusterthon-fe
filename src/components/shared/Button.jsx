@@ -18,7 +18,7 @@ const Button = ({
         primary && 'bg-primary text-white hover:bg-primary-hover'
       } ${
         outlined && 'bg-white border border-primary hover:text-primary'
-      } px-3 py-2 md:px-6 md:py-4 rounded-lg font-bold ${
+      } px-3 h-14 md:px-6 rounded-lg font-bold ${
         className && className
       } transition ease-in-out relative`}>
       {text}
