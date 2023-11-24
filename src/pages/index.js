@@ -23,7 +23,7 @@ export default function Home ()
   const {push} = useRouter()
   return (
     <main
-      className={ `overflow-hidden relative flex flex-col items-center min-h-screen px-5 pt-10 ${ sans.className }` }
+      className={ `overflow-x-hidden relative flex flex-col items-center min-h-screen px-5 pt-10 ${ sans.className }` }
     >
       <div>
         <div className='flex justify-center mb-7'>
@@ -50,18 +50,12 @@ export default function Home ()
           </Slider>
         </div>
         <div className='flex gap-4 justify-center w-full'>
-          <Button routeTo='/register' className={ 'w-[45%]' } primary text={ 'Sign Up' } />
-          <Button routeTo='/login' className={ 'w-[45%]' } outlined text={ 'Log in' } />
+          <Button routeTo='/register' className={ 'w-[40%]' } primary text={ 'Sign Up' } />
+          <Button routeTo='/login' className={ 'w-[40%]' } outlined text={ 'Log in' } />
         </div>
       </div>
 
-      {/* Bars */ }
-      <Image src='/bar-1.svg' width={ 320 } height={ 640 } alt='decorative' className='absolute bottom-20 -left-80 right-0 w-[50%] sm:w-[40%] md:w-[30%] lg:w-[25%] xl:w-[18%] mx-auto z-20 bar one' />
-      <Image src='/bar-2.svg' width={ 320 } height={ 640 } alt='decorative' className='absolute  -bottom-5 -right-80 left-0 w-[50%] sm:w-[40%] md:w-[30%] lg:w-[25%] xl:w-[18%] mx-auto z-20 bar two' />
-      {/* Mobile */ }
-      <Image src='/mobile.svg' width={ 320 } height={ 640 } alt='decorative' className='absolute -bottom-10 left-0 right-0 w-[50%] sm:w-[40%] md:w-[30%] lg:w-[25%] xl:w-[18%] mx-auto z-10 mobile-intro' />
-      {/* Ellipse */ }
-      <Image src='/ellipse.svg' width={ 900 } height={ 163 } alt='decorative' className='absolute bottom-0 right-0 left-0 mx-auto z-0 ellipse' />
+      <Image src='/heroImage.svg' width={ 650 } height={ 386 } alt='decorative' className='hero absolute bottom-0 left-0 right-0 mx-auto' />
     </main>
   );
 }

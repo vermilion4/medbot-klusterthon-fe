@@ -46,7 +46,7 @@ const AuthCard = ({ register, login }) => {
     console.log(values);
   };
   return (
-    <div className=' w-[90vw] max-w-[482px] bg-grey-100 py-8 px-5 md:px-[54px] mx-auto rounded-[20px] text-center'>
+    <>
       <h2 className='font-bold text-[32px] leading-10 mb-2'>
         {register ? 'Create account' : 'Sign in'}
       </h2>
@@ -66,7 +66,7 @@ const AuthCard = ({ register, login }) => {
           <input
             type='email'
             placeholder='Email address'
-            className='w-full rounded-[10px] py-3 px-4 border focus:border-primary outline-none focus:ring-2'
+            className='w-full rounded-[10px] h-14 px-4 border-2 focus:border-primary outline-none ring-primary-surface focus:ring-4'
           />
         </Form.Item>
         <div className='relative'>
@@ -77,7 +77,7 @@ const AuthCard = ({ register, login }) => {
             <input
               type={`${showPassword.password ? 'text' : 'password'}`}
               placeholder='Password'
-              className='w-full rounded-[10px] py-3 px-4 relative border focus:border-primary outline-none focus:ring-2'
+              className='w-full rounded-[10px] h-14 px-4 relative border-2 focus:border-primary outline-none ring-primary-surface focus:ring-4'
             />
           </Form.Item>
           <p
@@ -105,7 +105,7 @@ const AuthCard = ({ register, login }) => {
               <input
                 type={`${showPassword.confirmPassword ? 'text' : 'password'}`}
                 placeholder='Re-enter password'
-                className={`w-full rounded-[10px] py-3 px-4 relative border focus:border-primary outline-none focus:ring-2`}
+                className={`w-full rounded-[10px] h-14 px-4 relative border-2 focus:border-primary outline-none ring-primary-surface focus:ring-4`}
               />
             </Form.Item>
             <p
@@ -161,7 +161,7 @@ const AuthCard = ({ register, login }) => {
           alt='popup question'
         />
       </Dropdown>
-    </div>
+    </>
   );
 };
 
