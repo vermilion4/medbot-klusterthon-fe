@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+body {
+  color: #1a1f21;
+}
+
+.slick-slider {
+  width: 80vw;
+  max-width: 530px !important;
+}
+
+.slick-dots li button::before {
+  color: #14b9a4 !important;
+  font-size: 10px !important;
+}
+.slick-dots li {
+  margin: 0 !important;
+}
+
+.slick-arrow {
+  display: none !important;
+}
+
+.ant-form-item-explain-error{
+  font-size: 12px;
+  color: #D33030 !important;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+.ant-form-item-has-error .ant-form-item-control-input-content{
+  border: 1px solid #D33030;
+  border-radius: 10px;
+}
+
+@media (min-height: 768px){
+  main {
+    padding-top: 100px !important;
+  }
+}
+
+@media (min-height: 967px) and (min-width: 1000px) {
+  .mobile-intro,
+  .bar {
+    width: 20% !important;
+  }
+  .ellipse {
+    height: 15% !important;
+  }
+  img.bar.one {
+    bottom: 170px !important;
+    left: -330px !important;
+  }
+  img.bar.two {
+    right: -390px !important;
+  }
+}
+/* @media (min-height: 468px) and (min-width: 1210px) {
+
+} */
+@media (max-width: 450px) {
+  img.bar.one {
+    bottom: 50px !important;
+    left: -230px !important;
+  }
+  img.bar.two {
+    right: -190px !important;
+  }
+}
+@media (min-height: 968px) {
+  .mobile-intro,
+  .bar {
+    width: 50% !important;
+    max-width: 600px;
+  }
+  main {
+    padding-top: 100px !important;
+  }
+}
