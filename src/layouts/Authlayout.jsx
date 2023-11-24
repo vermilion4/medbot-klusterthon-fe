@@ -5,7 +5,7 @@ import React from 'react';
 const AuthLayout = ({ children, backText }) => {
   const { push, back } = useRouter();
   return (
-    <main
+    <div
       className='min-h-screen'
       style={{ display: 'grid', placeContent: 'center' }}>
       <div className='flex justify-center mb-7'>
@@ -32,10 +32,10 @@ const AuthLayout = ({ children, backText }) => {
           </p>
         </div>
       )}
-      <div className='w-[90vw] max-w-[482px] bg-grey-100 py-8 px-5 md:px-[54px] mx-auto rounded-[20px] text-center mb-5'>
+      <div className='auth-layout'>
         {children}
       </div>
-    </main>
+    </div>
   );
 };
 

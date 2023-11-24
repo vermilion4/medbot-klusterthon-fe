@@ -24,22 +24,22 @@ module.exports = {
         'grey':{
           50: '#F2F2F2',
           100: '#FAF9F9',
-          200: '#E2E2E2'
+          200: '#E2E2E2',
         },
         'warning': {
           10:'#FFB3191F',
           60:'#FFB3198F',
-          100:'#FFB319'
+          100:'#FFB319',
         },
         'critical': {
           10:'#D330301F',
           60:'#D330308F',
-          100:'#D33030'
+          100:'#D33030',
         },
         }
       }
     },
-    "plugins": [
+    plugins: [
       [
         "import",
       {
