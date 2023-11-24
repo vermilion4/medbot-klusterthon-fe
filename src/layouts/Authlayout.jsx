@@ -26,7 +26,7 @@ const AuthLayout = ({ children, backText }) => {
           style={{ marginBottom: '32px', marginTop: '70px' }}>
           <Image src='/backArrow.svg' width={24} height={24} alt='back arrow' />
           <p
-            className='text-center mb-8 font-medium cursor-pointer'
+            className='text-center font-medium cursor-pointer'
             onClick={() => back()}>
             {backText}
           </p>
