@@ -77,11 +77,11 @@ const AuthCard = ({ register, login }) => {
             <input
               type={`${showPassword.password ? 'text' : 'password'}`}
               placeholder='Password'
-              className='w-full rounded-[10px] h-14 px-4 relative border-2 focus:border-primary outline-none ring-primary-surface focus:ring-4'
+              className='w-full rounded-[10px] h-14 pl-4 pr-16 relative border-2 focus:border-primary outline-none ring-primary-surface focus:ring-4'
             />
           </Form.Item>
           <p
-            className='underline absolute top-[13px] right-4 font-medium text-sm cursor-pointer'
+            className='underline absolute top-[18px] right-4 font-medium text-sm cursor-pointer'
             onClick={() => toggleShowPassword('password')}>
             {showPassword.password ? 'Hide' : 'Show'}
           </p>
@@ -105,11 +105,11 @@ const AuthCard = ({ register, login }) => {
               <input
                 type={`${showPassword.confirmPassword ? 'text' : 'password'}`}
                 placeholder='Re-enter password'
-                className={`w-full rounded-[10px] h-14 px-4 relative border-2 focus:border-primary outline-none ring-primary-surface focus:ring-4`}
+                className={`w-full rounded-[10px] h-14 pl-4 pr-16 relative border-2 focus:border-primary outline-none ring-primary-surface focus:ring-4`}
               />
             </Form.Item>
             <p
-              className='underline absolute top-[13px] right-4 font-medium text-sm cursor-pointer'
+              className='underline absolute top-[18px] right-4 font-medium text-sm cursor-pointer'
               onClick={() => toggleShowPassword('confirmPassword')}>
               {showPassword.confirmPassword ? 'Hide' : 'Show'}
             </p>
