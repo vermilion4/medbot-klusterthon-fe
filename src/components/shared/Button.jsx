@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const Button = ({
@@ -8,20 +9,34 @@ const Button = ({
   routeTo,
   htmlType,
   loading,
+  rightIcon,
+  clickFunction
 }) => {
   const { push } = useRouter();
   return (
     <button
       type={htmlType}
-      onClick={() => routeTo && push(routeTo)}
+      onClick={() => {
+        routeTo && push(routeTo)
+      clickFunction && clickFunction()}}
       className={`${
         primary && 'bg-primary text-white hover:bg-primary-hover'
       } ${
         outlined && 'bg-white border border-primary hover:text-primary'
       } px-3 h-14 md:px-6 rounded-lg font-bold ${
         className && className
-      } transition ease-in-out relative`}>
+      } transition ease-in-out relative ${rightIcon && 'flex gap-4 items-center'}`}>
       {text}
+      {
+        rightIcon && (
+          <Image
+            src={rightIcon}
+            width={24}
+            height={24}
+            alt='right icon'
+          />
+        )
+      }
       {loading && (
         <div role='status'>
           <svg

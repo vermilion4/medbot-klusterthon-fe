@@ -1,0 +1,6 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon">
+<path d="M0 8C0 3.58172 3.58172 0 8 0H28C32.4183 0 36 3.58172 36 8V28C36 32.4183 32.4183 36 28 36H8C3.58172 36 0 32.4183 0 28V8Z" fill="#6FAD3F" fill-opacity="0.12"/>
+<path id="info" d="M18 23.9375V16.8125M18 13.8438V12.0625M28.6875 18C28.6875 23.9025 23.9025 28.6875 18 28.6875C12.0975 28.6875 7.3125 23.9025 7.3125 18C7.3125 12.0975 12.0975 7.3125 18 7.3125C23.9025 7.3125 28.6875 12.0975 28.6875 18Z" stroke="#6FAD3F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

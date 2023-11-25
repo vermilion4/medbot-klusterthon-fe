@@ -32,7 +32,7 @@ const AuthLayout = ({ children, backText }) => {
           </p>
         </div>
       )}
-      <div className='auth-layout'>
+      <div className='w-[90vw] max-w-[482px] bg-grey-100 rounded-[20px] py-8 md:px-[54px] px-5 mb-5 text-center'>
         {children}
       </div>
     </div>
