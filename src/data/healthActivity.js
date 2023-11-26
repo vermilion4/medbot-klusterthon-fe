@@ -45,3 +45,7 @@ export const possibleCause = [
     severity: 'low'
   },
 ]
+
+export const symptoms = [
+  'Headaches', 'Eyes sensitive to light', 'Runny nose', 'Different sized pupils', 'Face swelling'
+]

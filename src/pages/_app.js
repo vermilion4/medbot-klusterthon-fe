@@ -13,6 +13,13 @@ export default function App({ Component, pageProps }) {
           defaultBorderColor: '#0098DE',
           defaultColor: '#1A1F21',
         },
+        Tabs: {
+          inkBarColor: '#0098DE',
+          itemActiveColor: '#0098DE',
+          itemSelectedColor: '#0098DE',
+          itemHoverColor: '#0098DE',
+          itemColor: 'rgba(0, 0, 0, 0.45)'
+        },
        
       },
     }}

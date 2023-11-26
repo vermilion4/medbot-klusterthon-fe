@@ -18,7 +18,7 @@ export const sidebar = [
     icon: '/discover.svg',
     activeIcon: '/discover-active.svg',
     title: 'Most Searched Symptoms',
-    navTo: '#'
+    navTo: '/dashboard/most-searched-symptoms'
   },
   {
     id: '4',

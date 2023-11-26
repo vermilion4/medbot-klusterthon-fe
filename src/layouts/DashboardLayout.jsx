@@ -25,6 +25,7 @@ const DashboardLayout = ({ children }) => {
   const isLargeScreen = useIsLargeScreen();
 
   const [selectedKeys, setSelectedKeys] = useState('1');
+  const [loading, setLoading] = useState(true);
 
   const handleMenuClick = (navTo, key) => {
     setSelectedKeys(key);
@@ -78,7 +79,14 @@ const DashboardLayout = ({ children }) => {
     else {
       setSelectedKeys((prev)=> prev)
     }
-  }, []);
+
+    setLoading(false);
+  }, [isLargeScreen]);
+
+  if (loading) {
+    // You can render a loading spinner or some placeholder while the size is being determined
+    return <div>Loading...</div>;
+  }
 
   return (
     <Layout>

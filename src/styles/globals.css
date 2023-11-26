@@ -68,6 +68,16 @@ body {
   overflow-x: hidden !important;
 }
 
+#print-only {
+  display: none;
+}
+
+@media print {
+  #print-only {
+    display: block;
+  }
+}
+
 @media (min-width: 991px) {
   .ant-layout-sider {
     width: 259px !important;
