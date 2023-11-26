@@ -3,7 +3,7 @@ import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 import { selectActiveNavigation, setActiveNavigation } from '@/store/appSlice';
 import { getUserProfile, selectUser } from '@/store/userSlice';
 import { setToken } from '@/utils/http';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Skeleton } from 'antd';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -25,8 +25,8 @@ const headerStyle = {
 };
 
 const DashboardLayout = ({ children }) => {
-  const {user, loading:profleLoading} = useSelector(selectUser)
-  const activeNav = useSelector(selectActiveNavigation)
+  const { user, loading: profileLoading } = useSelector(selectUser);
+  const activeNav = useSelector(selectActiveNavigation);
   const dispatch = useDispatch();
 
   const { push } = useRouter();
@@ -79,15 +79,6 @@ const DashboardLayout = ({ children }) => {
   };
 
   useEffect(() => {
-    // const currentPath = window.location.pathname;
-    // const selectedItem = sidebar?.find((item) => item?.navTo === currentPath);
-    // if (selectedItem) {
-    //   setSelectedKeys(selectedItem?.id);
-    // }
-    // else {
-    //   setSelectedKeys((prev)=> prev)
-    // }
-
     setLoading(false);
   }, [isLargeScreen]);
 
@@ -157,17 +148,32 @@ const DashboardLayout = ({ children }) => {
             label: title,
             icon: <Image src={icon} width={18} height={18} alt='icon' />,
             onClick: () => {
-              signOut({callbackUrl: '/auth/login'});
-            }
+              signOut({ callbackUrl: '/auth/login' });
+            },
           }))}
         />
       </Sider>
       <Layout>
         <Header style={headerStyle}>
-          <div className='p-2 rounded-full bg-primary-surface text-black text-sm font-bold'>
-            TP
-          </div>
-          <div>{`${user?.firstName} ${user?.lastName}`}</div>
+          {profileLoading ? (
+            <Skeleton.Button active 
+            shape={'square'}
+          
+            style={{
+              height: '2rem',
+             width: '150px',
+              marginTop: '20px',
+            }} />
+          ) : (
+            <>
+              <div className='p-2 rounded-full bg-primary-surface text-black text-sm font-bold'>
+                <p className='uppercase'>{`${user?.firstName?.charAt(
+                  0
+                )}${user?.lastName?.charAt(0)}`}</p>
+              </div>
+              <div>{`${user?.firstName} ${user?.lastName}`}</div>
+            </>
+          )}
         </Header>
         <Content style={contentStyle}>{children}</Content>
         <Footer style={footerStyle}>

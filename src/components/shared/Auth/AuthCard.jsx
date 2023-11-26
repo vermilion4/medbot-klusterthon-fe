@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { signIn, useSession } from 'next-auth/react';
 import { openNotificationWithIcon } from '@/utils/helper';
 import _ from 'lodash';
+import { registerUser } from '@/lib/auth';
 
 const { Text } = Typography;
 
@@ -56,20 +57,46 @@ const AuthCard = ({ register, login }) => {
 
   const onFinish = async (values) => {
     setLoading(true);
-    const response = await signIn('credentials', {
-      email: values.email,
-      password: values.password,
-      redirect: false,
-    });
+    
+    if (login) {
+      const response = await signIn('credentials', {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+  
+      if (response?.error) {
+        setLoading(false);
+        openNotificationWithIcon('error', 'Signin', response?.error);
+      }
+  
+      if (response?.ok) {
+        setLoading(false);
+        openNotificationWithIcon('success', 'Signin', 'Sign in successful');
+      }
+    } else {
+      const data = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        password: values.password,
+      }
 
-    if (response?.error) {
-      setLoading(false);
-      openNotificationWithIcon('error', 'Signin', response?.error);
-    }
+      try{
+        const response = await registerUser(data)
+        if (response) {
+          setLoading(false);
+          push({
+            pathname: '/auth/register/verify-email',
+            query: { email: values.email },
+          })
+        }
+      }
+      catch(error){
+        setLoading(false);
+        openNotificationWithIcon('error', 'Signup', error.message);
+      }
 
-    if (response?.ok) {
-      setLoading(false);
-      openNotificationWithIcon('success', 'Signin', 'Sign in successful');
     }
   };
 
@@ -89,6 +116,32 @@ const AuthCard = ({ register, login }) => {
         </span>
       </p>
       <Form onFinish={onFinish}>
+        {
+          register && (
+            <>
+            <Form.Item
+              className='text-start'
+              name={'firstName'}
+              rules={[{ required: true, message: 'Enter your First name' }]}>
+              <input
+                type='text'
+                placeholder='First name'
+                className='w-full rounded-[10px] h-14 px-4 border-2 focus:border-primary outline-none ring-primary-surface focus:ring-4'
+              />
+            </Form.Item>
+            <Form.Item
+              className='text-start'
+              name={'lastName'}
+              rules={[{ required: true, message: 'Enter your Last name' }]}>
+              <input
+                type='text'
+                placeholder='Last name'
+                className='w-full rounded-[10px] h-14 px-4 border-2 focus:border-primary outline-none ring-primary-surface focus:ring-4'
+              />
+              </Form.Item>
+            </>
+          )
+        }
         <Form.Item
           className='text-start'
           name={'email'}
@@ -119,7 +172,7 @@ const AuthCard = ({ register, login }) => {
         {login && (
           <div className='mb-4 text-start'>
             <Link
-              href={'/forgot-password'}
+              href={'/auth/forgot-password'}
               className='underline font-medium text-sm'>
               Forgot Password?
             </Link>
