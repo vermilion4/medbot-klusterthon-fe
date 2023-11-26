@@ -3,7 +3,7 @@ import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { login } from "@/lib/auth";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import { setToken } from "@/utils/http";
 
 /**
@@ -41,7 +41,7 @@ export const authOptions = {
           return user;
         } catch (error) {
           console.log({ error });
-          return null;
+          return error;
         }
       },
     }),
@@ -51,7 +51,7 @@ export const authOptions = {
       if (user) {
         session.user = user; // Add the user to the session object
       }
-      return session;
+      return Promise.resolve(session);
     },
   },
   pages: {

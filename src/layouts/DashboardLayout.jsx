@@ -1,7 +1,7 @@
 import { bottomSidebar, sidebar } from '@/data/sidebar';
 import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 import { Layout, Menu } from 'antd';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -27,6 +27,10 @@ const DashboardLayout = ({ children }) => {
 
   const [selectedKeys, setSelectedKeys] = useState('1');
   const [loading, setLoading] = useState(true);
+
+  const { data: session, status } = useSession();
+
+  console.log(status)
 
   const handleMenuClick = (navTo, key) => {
     setSelectedKeys(key);

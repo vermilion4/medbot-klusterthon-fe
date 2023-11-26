@@ -12,7 +12,7 @@ const CheckInbox = () => {
       <p className='mb-8'>
       We have sent a link to reset your password. If you did not receive any link, click the button below to resend.
       </p>
-      <Button routeTo='/register' className={ 'w-[40%]' } primary text={ 'Resend Link' } />
+      <Button routeTo='/auth/register' className={ 'w-[40%]' } primary text={ 'Resend Link' } />
     </AuthLayout>
    );
 }

@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { signIn, useSession} from "next-auth/react";
+import { openNotificationWithIcon } from '@/utils/helper';
+import _ from 'lodash';
 
 
 const { Text } = Typography;
@@ -18,6 +20,9 @@ const AuthCard = ({ register, login }) => {
     password: false,
     confirmPassword: false,
   });
+
+  console.log(session?.user)
+  console.log(status)
 
   const toggleShowPassword = (inputName) => {
     setShowPassword((prev) => ({
@@ -45,16 +50,26 @@ const AuthCard = ({ register, login }) => {
     },
   ];
 
-
+  useEffect(() => {
+    if (!_.isEmpty(session?.user)) {
+      setLoading(false)
+      openNotificationWithIcon('success', 'Signin', 'Sign in successful')
+      push('/dashboard')
+    } 
+  }, [status]);
 
   const onFinish = (values) => {
-    console.log(values);
     setLoading(true);
     signIn('credentials', {
       email: values.email,
       password: values.password,
-      callbackUrl: `/dashboard`,
-    });
+      // callbackUrl: `/dashboard`,
+    })
+    .catch((error)=>{
+      setLoading(false)
+      console.log(error)
+      openNotificationWithIcon('error', 'Signin', 'Sign in failed')
+    })
   };
 
   return (
@@ -66,7 +81,7 @@ const AuthCard = ({ register, login }) => {
         {register ? 'Already have an account?' : "Don't have an account?"}
         <span
           className='ml-2 text-sm font-medium leading-6 cursor-pointer underline'
-          onClick={() => (register ? push('/login') : push('/register'))}>
+          onClick={() => (register ? push('/login') : push('/auth/register'))}>
           {register ? 'Log in' : 'Create account'}
         </span>
       </p>
