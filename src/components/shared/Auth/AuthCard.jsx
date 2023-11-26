@@ -6,12 +6,9 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { signIn, useSession} from "next-auth/react";
+import { signIn, useSession } from 'next-auth/react';
 import { openNotificationWithIcon } from '@/utils/helper';
 import _ from 'lodash';
-import { useDispatch } from 'react-redux';
-import { setToken } from '@/utils/http';
-
 
 const { Text } = Typography;
 
@@ -23,7 +20,6 @@ const AuthCard = ({ register, login }) => {
     password: false,
     confirmPassword: false,
   });
-
 
   const toggleShowPassword = (inputName) => {
     setShowPassword((prev) => ({
@@ -53,9 +49,9 @@ const AuthCard = ({ register, login }) => {
 
   useEffect(() => {
     if (!_.isEmpty(session?.user)) {
-      localStorage.setItem('token', session?.user?.accessToken)
-      push('/dashboard')
-    } 
+      localStorage.setItem('token', session?.user?.accessToken);
+      push('/dashboard');
+    }
   }, [session]);
 
   const onFinish = async (values) => {
@@ -64,19 +60,17 @@ const AuthCard = ({ register, login }) => {
       email: values.email,
       password: values.password,
       redirect: false,
-      // callbackUrl: `/dashboard`,
-    })
+    });
 
     if (response?.error) {
       setLoading(false);
-      openNotificationWithIcon('error', 'Signin', response?.error)
+      openNotificationWithIcon('error', 'Signin', response?.error);
     }
 
     if (response?.ok) {
       setLoading(false);
-      openNotificationWithIcon('success', 'Signin', 'Sign in successful')
+      openNotificationWithIcon('success', 'Signin', 'Sign in successful');
     }
-    
   };
 
   return (
@@ -88,7 +82,9 @@ const AuthCard = ({ register, login }) => {
         {register ? 'Already have an account?' : "Don't have an account?"}
         <span
           className='ml-2 text-sm font-medium leading-6 cursor-pointer underline'
-          onClick={() => (register ? push('/auth/login') : push('/auth/register'))}>
+          onClick={() =>
+            register ? push('/auth/login') : push('/auth/register')
+          }>
           {register ? 'Log in' : 'Create account'}
         </span>
       </p>
@@ -198,6 +194,5 @@ const AuthCard = ({ register, login }) => {
     </>
   );
 };
-
 
 export default AuthCard;
