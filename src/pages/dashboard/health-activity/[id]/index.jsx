@@ -83,8 +83,8 @@ const HealthReport = () => {
         </div>
         <h3 className='text-subdued font-medium mb-4'>Possible Causes</h3>
         <div className='py-5 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-[14px]'>
-          {possibleCause?.map((cause) => (
-          <HealthCard activity={cause} />
+          {possibleCause?.map((cause, index) => (
+          <HealthCard key={index} activity={cause} />
           ))}
         </div>
         <h3 className='text-subdued font-medium mb-4 mt-[30px]'>Symptoms</h3>

@@ -4,8 +4,8 @@ import { Breadcrumb, Tabs } from 'antd';
 import { useRouter } from 'next/router';
 
 const ExpandCauses = () => {
-  const {query, back} = useRouter()
-  const {issue, id} = query
+  const { query, back } = useRouter();
+  const { issue, id } = query;
   const tabitems = [
     {
       key: '1',
@@ -46,20 +46,20 @@ const ExpandCauses = () => {
           items={[
             {
               title: 'Health activities',
-              href: '/dashboard/health-activity'
+              href: '/dashboard/health-activity',
             },
             {
               title: 'Possible causes',
-              href: `/dashboard/health-activity/${id}`
+              href: `/dashboard/health-activity/${id}`,
             },
             {
               title: `${issue}`,
             },
           ]}
         />
-      <div className='mt-[34px]'>
-      <Tabs defaultActiveKey="1" items={tabitems}  />
-      </div>
+        <div className='mt-[34px]'>
+          <Tabs defaultActiveKey='1' items={tabitems} />
+        </div>
       </div>
     </DashboardLayout>
   );
