@@ -19,13 +19,11 @@ const Button = ({
     if (routeTo) {
       // Check if queryParams is provided
       if (queryParams) {
-        // If queryParams is an object, add it to the route
         push({
           pathname: routeTo,
           query: queryParams,
         });
       } else {
-        // Otherwise, navigate to the route without query parameters
         push(routeTo);
       }
     }
