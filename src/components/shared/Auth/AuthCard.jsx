@@ -56,7 +56,7 @@ const AuthCard = ({ register, login }) => {
       localStorage.setItem('token', session?.user?.accessToken)
       push('/dashboard')
     } 
-  }, [status]);
+  }, [session]);
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -88,7 +88,7 @@ const AuthCard = ({ register, login }) => {
         {register ? 'Already have an account?' : "Don't have an account?"}
         <span
           className='ml-2 text-sm font-medium leading-6 cursor-pointer underline'
-          onClick={() => (register ? push('/login') : push('/auth/register'))}>
+          onClick={() => (register ? push('/auth/login') : push('/auth/register'))}>
           {register ? 'Log in' : 'Create account'}
         </span>
       </p>
