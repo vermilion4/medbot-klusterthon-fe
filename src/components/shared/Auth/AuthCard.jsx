@@ -2,13 +2,16 @@ import { Dropdown, Form, Typography } from 'antd';
 import Button from '../Button';
 import SocialLogin from './SocialLogin';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { signIn, useSession} from "next-auth/react";
+
 
 const { Text } = Typography;
 
 const AuthCard = ({ register, login }) => {
+  const { data: session, status } = useSession();
   const { push } = useRouter();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState({
@@ -42,9 +45,18 @@ const AuthCard = ({ register, login }) => {
     },
   ];
 
+
+
   const onFinish = (values) => {
     console.log(values);
+    setLoading(true);
+    signIn('credentials', {
+      email: values.email,
+      password: values.password,
+      callbackUrl: `/dashboard`,
+    });
   };
+
   return (
     <>
       <h2 className='font-bold text-[32px] leading-10 mb-2'>
@@ -164,5 +176,6 @@ const AuthCard = ({ register, login }) => {
     </>
   );
 };
+
 
 export default AuthCard;

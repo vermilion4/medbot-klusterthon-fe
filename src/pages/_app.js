@@ -1,10 +1,12 @@
-import '@/styles/globals.css'
+import "@/styles/globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ConfigProvider } from 'antd';
+import { SessionProvider } from "next-auth/react";
+import { ConfigProvider } from "antd";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
+    <SessionProvider session={pageProps.session}>
     <ConfigProvider
     theme={{
       components: {
@@ -26,5 +28,6 @@ export default function App({ Component, pageProps }) {
   >
   <Component {...pageProps} />
   </ConfigProvider>
+  </SessionProvider>
   )
 }

@@ -50,8 +50,8 @@ export default function Home ()
           </Slider>
         </div>
         <div className='flex gap-4 justify-center w-full'>
-          <Button routeTo='/register' className={ 'w-[40%]' } primary text={ 'Sign Up' } />
-          <Button routeTo='/login' className={ 'w-[40%]' } outlined text={ 'Log in' } />
+          <Button routeTo='/auth/register' className={ 'w-[40%]' } primary text={ 'Sign Up' } />
+          <Button routeTo='/auth/login' className={ 'w-[40%]' } outlined text={ 'Log in' } />
         </div>
       </div>
 

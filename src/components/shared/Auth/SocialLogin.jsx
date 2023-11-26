@@ -1,3 +1,4 @@
+import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 
 const SocialLogin = () => {
@@ -8,7 +9,11 @@ const SocialLogin = () => {
         <p className='font-bold text-xs'>Or</p>
         <hr className='border border-grey-200 w-full' />
       </div>
-      <div className='p-4 flex justify-center relative border border-grey-200 rounded-lg mb-2'>
+      <div className='p-4 flex justify-center relative border border-grey-200 rounded-lg mb-2'
+        onClick={()=>{
+          signIn('google', { callbackUrl: '/dashboard' })
+        }}
+        >
         <Image
           className='hidden sm:block absolute top-[19px] left-[19px]'
           src='/google.svg'

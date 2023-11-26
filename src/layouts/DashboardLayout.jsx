@@ -1,6 +1,7 @@
 import { bottomSidebar, sidebar } from '@/data/sidebar';
 import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 import { Layout, Menu } from 'antd';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -141,7 +142,9 @@ const DashboardLayout = ({ children }) => {
             key: id,
             label: title,
             icon: <Image src={icon} width={18} height={18} alt='icon' />,
-            onClick: () => push(navTo),
+            onClick: () => {
+              signOut({callbackUrl: '/auth/login'});
+            }
           }))}
         />
       </Sider>
