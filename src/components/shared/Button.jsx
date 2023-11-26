@@ -10,15 +10,34 @@ const Button = ({
   htmlType,
   loading,
   rightIcon,
-  clickFunction
+  clickFunction,
+  queryParams
 }) => {
   const { push } = useRouter();
+
+  const handleButtonClick = () => {
+    if (routeTo) {
+      // Check if queryParams is provided
+      if (queryParams) {
+        // If queryParams is an object, add it to the route
+        push({
+          pathname: routeTo,
+          query: queryParams,
+        });
+      } else {
+        // Otherwise, navigate to the route without query parameters
+        push(routeTo);
+      }
+    }
+
+    // Call clickFunction if provided
+    clickFunction && clickFunction();
+  };
+
   return (
     <button
       type={htmlType}
-      onClick={() => {
-        routeTo && push(routeTo)
-      clickFunction && clickFunction()}}
+      onClick={handleButtonClick}
       className={`${
         primary && 'bg-primary text-white hover:bg-primary-hover'
       } ${

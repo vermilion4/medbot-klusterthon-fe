@@ -75,6 +75,9 @@ const DashboardLayout = ({ children }) => {
     if (selectedItem) {
       setSelectedKeys(selectedItem?.id);
     }
+    else {
+      setSelectedKeys((prev)=> prev)
+    }
   }, []);
 
   return (
@@ -84,10 +87,10 @@ const DashboardLayout = ({ children }) => {
         breakpoint='lg'
         collapsedWidth='80px'
         onBreakpoint={(broken) => {
-          console.log(broken);
+          // console.log(broken);
         }}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
+          // console.log(collapsed, type);
         }}>
         {isLargeScreen ? (
           <Image
