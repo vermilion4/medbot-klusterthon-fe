@@ -3,8 +3,7 @@ import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { login } from "@/lib/auth";
-import jwtDecode from "jwt-decode";
-import { setToken } from "@/utils/http";
+import {jwtDecode} from "jwt-decode";
 
 /**
  * @type {NextAuthOptions}
@@ -19,37 +18,38 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: {
+        email: {
           label: "Username:",
           type: "text",
-          placeholder: "your-cool-username",
         },
         password: {
           label: "Password:",
           type: "password",
-          placeholder: "your-awesome-password",
         },
       },
       async authorize(credentials) {
-        try {
-          console.log({ credentials });
-
+        
           const { email, password } = credentials;
           const response = await login({ email, password });
+
+          if (!response.encryptedUser ) {
+            return {error: response}
+          }
+
           const user = jwtDecode(response.encryptedUser);
-          setToken(response.tokens.access.token);
+          user.accessToken = response.tokens.access.token;
           return user;
-        } catch (error) {
-          console.log({ error });
-          return error;
-        }
+        
       },
     }),
   ],
   callbacks: {
-    async session({ session, user }) {
-      if (user) {
-        session.user = user; // Add the user to the session object
+    async jwt(token, user, account, profile, isNewUser) {
+      return Promise.resolve(token);
+    },
+    async session({ session, token, user }) {
+      if (token.token.user) {
+        session.user = token.token.user; // Add the user to the session object
       }
       return Promise.resolve(session);
     },

@@ -11,3 +11,11 @@ import appAxios from "@/utils/http";
 export const login = (data) => {
     return appAxios.post('/auth/login', data);
 }
+
+/**
+ * Get profile
+ * @returns {Promise}
+ */
+export const getProfile = () => {
+    return appAxios.get('/users/me');
+}

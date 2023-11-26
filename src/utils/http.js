@@ -21,7 +21,9 @@ appAxios.interceptors.response.use(response => {
 /**
  * Set token to header
  */
-export const setToken = (token) => {
+export const setToken = () => {
+  const token = localStorage.getItem('token');
+  
     appAxios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
   

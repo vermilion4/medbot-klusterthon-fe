@@ -1,11 +1,14 @@
 import SymptomModal from '@/components/Dashboard/Modal';
 import Button from '@/components/shared/Button';
 import DashboardLayout from '@/layouts/DashboardLayout';
+import { selectUser } from '@/store/userSlice';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
+  const {user, loading} = useSelector(selectUser)
   const { push } = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,7 +32,7 @@ const Dashboard = () => {
           alt='logo'
         />
         <h2 className='text-xl md:text-[28px] font-medium leading-[32px] md:leading-[42px] text-center mb-8'>
-          Hello <span className='text-secondary'>Tola</span>👋🏽, Welcome to
+          Hello <span className='text-secondary'>{user?.firstName}</span>👋🏽, Welcome to
           Medbot AI! Discover more about your health with us.
         </h2>
         <Button

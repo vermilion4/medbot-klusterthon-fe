@@ -1,10 +1,14 @@
 import { bottomSidebar, sidebar } from '@/data/sidebar';
 import useIsLargeScreen from '@/hooks/useIsLargeScreen';
+import { selectActiveNavigation, setActiveNavigation } from '@/store/appSlice';
+import { getUserProfile, selectUser } from '@/store/userSlice';
+import { setToken } from '@/utils/http';
 import { Layout, Menu } from 'antd';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 const { Header, Footer, Sider, Content } = Layout;
 
 const headerStyle = {
@@ -21,19 +25,18 @@ const headerStyle = {
 };
 
 const DashboardLayout = ({ children }) => {
+  const {user, loading:profleLoading} = useSelector(selectUser)
+  const activeNav = useSelector(selectActiveNavigation)
+  const dispatch = useDispatch();
+
   const { push } = useRouter();
 
   const isLargeScreen = useIsLargeScreen();
 
-  const [selectedKeys, setSelectedKeys] = useState('1');
   const [loading, setLoading] = useState(true);
 
-  const { data: session, status } = useSession();
-
-  console.log(status)
-
   const handleMenuClick = (navTo, key) => {
-    setSelectedKeys(key);
+    dispatch(setActiveNavigation(key));
     push(navTo);
   };
 
@@ -76,17 +79,23 @@ const DashboardLayout = ({ children }) => {
   };
 
   useEffect(() => {
-    const currentPath = window.location.pathname;
-    const selectedItem = sidebar?.find((item) => item?.navTo === currentPath);
-    if (selectedItem) {
-      setSelectedKeys(selectedItem?.id);
-    }
-    else {
-      setSelectedKeys((prev)=> prev)
-    }
+    // const currentPath = window.location.pathname;
+    // const selectedItem = sidebar?.find((item) => item?.navTo === currentPath);
+    // if (selectedItem) {
+    //   setSelectedKeys(selectedItem?.id);
+    // }
+    // else {
+    //   setSelectedKeys((prev)=> prev)
+    // }
 
     setLoading(false);
   }, [isLargeScreen]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setToken(token);
+    dispatch(getUserProfile());
+  }, [dispatch]);
 
   if (loading) {
     // You can render a loading spinner or some placeholder while the size is being determined
@@ -119,6 +128,7 @@ const DashboardLayout = ({ children }) => {
         <Menu
           style={menuStyle}
           mode='inline'
+          selectedKeys={activeNav}
           onSelect={({ key }) => {
             const selectedItem = sidebar.find((item) => item.id === key);
             if (selectedItem) {
@@ -130,13 +140,13 @@ const DashboardLayout = ({ children }) => {
             label: title,
             icon: (
               <Image
-                src={selectedKeys?.includes(id) ? activeIcon : icon}
+                src={activeNav?.includes(id) ? activeIcon : icon}
                 width={18}
                 height={18}
                 alt='icon'
               />
             ),
-            style: selectedKeys?.includes(id) ? selectedMenuItemStyle : {},
+            style: activeNav?.includes(id) ? selectedMenuItemStyle : {},
           }))}
         />
         <Menu
@@ -157,7 +167,7 @@ const DashboardLayout = ({ children }) => {
           <div className='p-2 rounded-full bg-primary-surface text-black text-sm font-bold'>
             TP
           </div>
-          <div>Tola Park</div>
+          <div>{`${user?.firstName} ${user?.lastName}`}</div>
         </Header>
         <Content style={contentStyle}>{children}</Content>
         <Footer style={footerStyle}>

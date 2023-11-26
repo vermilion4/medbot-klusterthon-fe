@@ -1,3 +1,4 @@
+'use client';
 import { Dropdown, Form, Typography } from 'antd';
 import Button from '../Button';
 import SocialLogin from './SocialLogin';
@@ -8,6 +9,8 @@ import Image from 'next/image';
 import { signIn, useSession} from "next-auth/react";
 import { openNotificationWithIcon } from '@/utils/helper';
 import _ from 'lodash';
+import { useDispatch } from 'react-redux';
+import { setToken } from '@/utils/http';
 
 
 const { Text } = Typography;
@@ -21,8 +24,6 @@ const AuthCard = ({ register, login }) => {
     confirmPassword: false,
   });
 
-  console.log(session?.user)
-  console.log(status)
 
   const toggleShowPassword = (inputName) => {
     setShowPassword((prev) => ({
@@ -52,24 +53,30 @@ const AuthCard = ({ register, login }) => {
 
   useEffect(() => {
     if (!_.isEmpty(session?.user)) {
-      setLoading(false)
-      openNotificationWithIcon('success', 'Signin', 'Sign in successful')
+      localStorage.setItem('token', session?.user?.accessToken)
       push('/dashboard')
     } 
   }, [status]);
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     setLoading(true);
-    signIn('credentials', {
+    const response = await signIn('credentials', {
       email: values.email,
       password: values.password,
+      redirect: false,
       // callbackUrl: `/dashboard`,
     })
-    .catch((error)=>{
-      setLoading(false)
-      console.log(error)
-      openNotificationWithIcon('error', 'Signin', 'Sign in failed')
-    })
+
+    if (response?.error) {
+      setLoading(false);
+      openNotificationWithIcon('error', 'Signin', response?.error)
+    }
+
+    if (response?.ok) {
+      setLoading(false);
+      openNotificationWithIcon('success', 'Signin', 'Sign in successful')
+    }
+    
   };
 
   return (
