@@ -40,7 +40,7 @@ export default function Home ()
         <div className='intro-slider mb-16'>
           <Slider { ...settings } className='min-h-[150px]'>
             {
-              intro.map(({ id, title, description }) => (
+              intro?.map(({ id, title, description }) => (
                 <div key={ id } className='space-y-1 md:space-y-5 text-center'>
                   <h2 className='text-[22px] md:text-[44px] font-bold leading-[66px]'>{ title }</h2>
                   <p className='text-sm md:text-base'>{ description }</p>

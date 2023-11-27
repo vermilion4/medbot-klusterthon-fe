@@ -118,7 +118,7 @@ const SymptomAssessment = () => {
         </div>
 
         {loading ? (
-          [1, 2].map((item) => (
+          [1, 2]?.map((item) => (
             <Skeleton.Button
               key={item}
               active={true}

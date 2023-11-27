@@ -53,7 +53,7 @@ const Report = ({ componentRef, data }) => {
       </div>
       <h3 className='text-subdued font-medium mb-4 mt-[30px]'>Symptoms</h3>
       <div className='flex flex-col gap-3'>
-        {symptoms.map((symptom, index) => (
+        {symptoms?.map((symptom, index) => (
           <div key={index} className='flex items-center gap-[6px] text-sm'>
             <img src={'/arrowRight.svg'} className='w-[14px] h-[14px]' alt='arrow' />
             {symptom}

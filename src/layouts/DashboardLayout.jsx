@@ -141,7 +141,7 @@ const DashboardLayout = ({ children }) => {
               handleMenuClick(selectedItem.navTo, key);
             }
           }}
-          items={sidebar.map(({ id, title, icon, activeIcon }) => ({
+          items={sidebar?.map(({ id, title, icon, activeIcon }) => ({
             key: id,
             label: title,
             icon: (
@@ -158,7 +158,7 @@ const DashboardLayout = ({ children }) => {
         <Menu
           style={{ ...menuStyle, borderBottom: 'none', marginTop: 0 }}
           mode='inline'
-          items={bottomSidebar.map(({ id, title, icon }) => ({
+          items={bottomSidebar?.map(({ id, title, icon }) => ({
             key: id,
             label: title,
             icon: <Image src={icon} width={18} height={18} alt='icon' />,
