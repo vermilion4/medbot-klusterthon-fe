@@ -1,14 +1,14 @@
 import HealthCard from '@/components/Dashboard/Card';
 import AIQuestions from '@/components/Dashboard/symptom-assessment/AIQuestions';
 import DashboardLayout from '@/layouts/DashboardLayout';
-import { getQuestionsFromAI, sendSymptom } from '@/lib/ai';
-import { AutoComplete, Skeleton, Progress, Popconfirm } from 'antd';
+import { getQuestionsFromAI, getSymptoms, sendSymptom } from '@/lib/ai';
+import { AutoComplete, Skeleton, Progress, Popconfirm, Input } from 'antd';
 import { useRouter } from 'next/dist/client/router';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const SymptomAssessment = () => {
-  const {push} = useRouter()
+  const { push } = useRouter();
   const [loading, setLoading] = useState(false);
   const [questionsLoading, setQuestionsLoading] = useState(false);
   const [questionsList, setQuestionsList] = useState([]);
@@ -16,13 +16,21 @@ const SymptomAssessment = () => {
   const [showAIQuestions, setShowAIQuestions] = useState(false);
   const [symptom, setSymptom] = useState('');
   const [percent, setPercent] = useState(0);
+  const [options, setOptions] = useState([]);
 
-  const options = [
-    { value: 'headache' },
-    { value: 'sinus' },
-    { value: 'sore throat' },
-    { value: 'fever' },
-  ];
+  const handleSearch = async (keyword) => {
+    try {
+      const res = await getSymptoms(keyword);
+      const uniqueValues = new Set(res.data.map((item) => item.keyword));
+
+      // Create an array of objects with the 'value' property
+      const data = Array.from(uniqueValues).map((value) => ({
+        value,
+      }));
+
+      setOptions(data);
+    } catch (error) {}
+  };
 
   const onSelect = async (value) => {
     setLoading(true);
@@ -32,16 +40,12 @@ const SymptomAssessment = () => {
         symptom: value,
       };
       const response = await sendSymptom(data);
-      console.log(response);
       if (response) {
-        // openNotificationWithIcon('success', 'Reset password', 'Password reset successful');
-        // push('/auth/login')
         setSymptomList(response.data);
       }
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      // openNotificationWithIcon('error', 'Reset password', error.message)
     }
   };
 
@@ -79,7 +83,12 @@ const SymptomAssessment = () => {
         {showAIQuestions ? (
           <div className='flex items-center mb-4 gap-6'>
             <h2 className='text-start text-xl'>New assessment</h2>
-            <Progress size={50} strokeColor='#FFB319' type='circle' percent={percent} />
+            <Progress
+              size={50}
+              strokeColor='#FFB319'
+              type='circle'
+              percent={percent}
+            />
           </div>
         ) : (
           <h2 className='mb-4 text-start text-xl'>
@@ -91,22 +100,26 @@ const SymptomAssessment = () => {
           <AutoComplete
             style={{
               width: '70%',
-              height: '52px',
+              height: 'auto',
             }}
             onSelect={onSelect}
             filterOption={(inputValue, option) =>
               option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
               -1
             }
+            onSearch={(e) => {
+              handleSearch(e);
+            }}
             placeholder='e.g headache'
-            options={options}
-          />
+            options={options}>
+            <Input.Search onSearch={(e) => onSelect(e)} size='large' />
+          </AutoComplete>
           <Popconfirm
             title='Close assessment'
             description={`Are you sure you want to stop the assessment? Your progress will not be saved.`}
             okText='Yes'
-            onConfirm={()=> push('/dashboard')}
-            placement="left"
+            onConfirm={() => push('/dashboard')}
+            placement='left'
             cancelText='Cancel'>
             <div className='flex items-center gap-1 cursor-pointer'>
               <Image src='/cancel.svg' width={24} height={24} alt='cancel' />

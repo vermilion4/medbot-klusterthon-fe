@@ -12,27 +12,29 @@ const AIQuestions = ({ symptom, questionsList, setPercent }) => {
   const { setRecommendationData } = useRecommendation();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
-  const [loading, setLoading] = useState(false)
-  const {push} = useRouter()
+  const [loading, setLoading] = useState(false);
+  const { push } = useRouter();
 
   const handleNextQuestion = (answer) => {
-      // Add user answer to userAnswers
-      if (currentQuestionIndex < questionsList.length) {
-        setUserAnswers((prevAnswers) => [
-          ...prevAnswers,
-          { question: questionsList?.[currentQuestionIndex]?.question, answer },
-        ]);
-      }
+    // Add user answer to userAnswers
+    if (currentQuestionIndex < questionsList.length) {
+      setUserAnswers((prevAnswers) => [
+        ...prevAnswers,
+        { question: questionsList?.[currentQuestionIndex]?.question, answer },
+      ]);
+    }
 
     // Increment the current question index
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
 
-    const percentage = Math.round((userAnswers.length / questionsList.length) * 100);
+    const percentage = Math.round(
+      (userAnswers.length / questionsList.length) * 100
+    );
     setPercent(percentage);
   };
 
   const onQuestionsAnswered = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const data = {
         symptom,
@@ -41,15 +43,13 @@ const AIQuestions = ({ symptom, questionsList, setPercent }) => {
       const response = await getAIRecommendation(data);
       if (response) {
         setRecommendationData(response.data);
-        push('/dashboard/symptom-assessment/report')
+        push('/dashboard/symptom-assessment/report');
       }
-     
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-
   };
 
   return (
@@ -63,7 +63,7 @@ const AIQuestions = ({ symptom, questionsList, setPercent }) => {
                 ? 'So I am going to ask a few questions that will aid me in helping you'
                 : currentQuestionIndex <= questionsList?.length
                 ? questionsList?.[currentQuestionIndex - 1]?.question
-                : "Don’t forget that this is not a medical diagnosis. If in doubt, it is always best to seek advice from a medical professional."}
+                : 'Don’t forget that this is not a medical diagnosis. If in doubt, it is always best to seek advice from a medical professional.'}
             </div>
           </div>
           <div className='mt-7 flex items-end flex-col'>
@@ -81,16 +81,18 @@ const AIQuestions = ({ symptom, questionsList, setPercent }) => {
                   className={'w-full'}
                 />
               ) : currentQuestionIndex <= questionsList?.length ? (
-                questionsList?.[currentQuestionIndex - 1]?.options?.map((option, index) => (
-                  <div key={index}>
-                    <Button
-                      text={option}
-                      outlined
-                      clickFunction={() => handleNextQuestion(option)}
-                      className={'w-full'}
-                    />
-                  </div>
-                ))
+                questionsList?.[currentQuestionIndex - 1]?.options?.map(
+                  (option, index) => (
+                    <div key={index}>
+                      <Button
+                        text={option}
+                        outlined
+                        clickFunction={() => handleNextQuestion(option)}
+                        className={'w-full'}
+                      />
+                    </div>
+                  )
+                )
               ) : (
                 <Button
                   text={'Open Report'}

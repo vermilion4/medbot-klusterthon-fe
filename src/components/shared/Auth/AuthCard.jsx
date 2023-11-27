@@ -1,11 +1,9 @@
 'use client';
 import { Dropdown, Form, Typography } from 'antd';
 import Button from '../Button';
-import SocialLogin from './SocialLogin';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { signIn, useSession } from 'next-auth/react';
 import { openNotificationWithIcon } from '@/utils/helper';
 import _ from 'lodash';
@@ -215,7 +213,6 @@ const AuthCard = ({ register, login }) => {
           />
         </Form.Item>
       </Form>
-      <SocialLogin />
     </>
   );
 };
