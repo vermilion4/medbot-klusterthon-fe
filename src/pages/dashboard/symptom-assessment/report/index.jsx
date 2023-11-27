@@ -43,7 +43,7 @@ const AssessmentReport = () => {
       label: 'Download Report',
       key: '2',
       icon: <Image src={'/download.svg'} width={18} height={18} alt='icon' />,
-      onClick: ()=>handlePrint,
+      onClick: handlePrint,
     },
   ];
   const menuProps = {
