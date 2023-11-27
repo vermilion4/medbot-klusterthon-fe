@@ -29,24 +29,6 @@ const AuthCard = ({ register, login }) => {
     }));
   };
 
-  const items = [
-    {
-      key: '1',
-      label: (
-        <Link rel='noopener noreferrer' href='/'>
-          Terms of Service
-        </Link>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <Link rel='noopener noreferrer' href='/'>
-          Privacy Policy
-        </Link>
-      ),
-    },
-  ];
 
   useEffect(() => {
     if (!_.isEmpty(session?.user)) {
@@ -234,16 +216,6 @@ const AuthCard = ({ register, login }) => {
         </Form.Item>
       </Form>
       <SocialLogin />
-
-      <Dropdown menu={{ items }} placement='topLeft' arrow>
-        <Image
-          className='fixed bottom-10 right-5 md:right-20 cursor-pointer hover:scale-105 transition-all ease-in-out'
-          src='/question.svg'
-          width={44}
-          height={44}
-          alt='popup question'
-        />
-      </Dropdown>
     </>
   );
 };

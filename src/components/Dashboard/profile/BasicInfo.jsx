@@ -121,10 +121,9 @@ const BasicInfo = () => {
         <div className='flex justify-between items-center mb-4'>
           <h3 className='font-bold text-lg'>Basic Information</h3>
           <Button
-            primary
-            className={'bg-secondary hover:bg-secondary-hover w-[40%]'}
-            text={'Save All'}
-            htmlType={'submit'}
+            outlined
+            className={'w-[40%]'}
+            text={'Save changes'}
             disabled={_.isEmpty(dirtyFields) || !isValid}
             clickFunction={handleClick}
             loading={loading}

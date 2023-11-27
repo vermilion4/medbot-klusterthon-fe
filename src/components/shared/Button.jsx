@@ -44,7 +44,7 @@ const Button = ({
         outlined && 'bg-white border border-primary hover:text-primary'
       } px-3 h-14 md:px-6 rounded-lg font-bold ${
         className && className
-      } transition ease-in-out relative ${rightIcon && 'flex gap-4 items-center'} ${disabled && 'bg-opacity-20 hover:bg-opacity-20 cursor-default'}`}>
+      } transition ease-in-out relative ${rightIcon && 'flex gap-4 items-center'} ${disabled && 'bg-grey-200 opacity-50 hover:bg-opacity-20 cursor-default'}`}>
       {text}
       {
         rightIcon && (

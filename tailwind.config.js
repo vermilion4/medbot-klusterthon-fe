@@ -20,7 +20,7 @@ module.exports = {
         secondary: '#14B9A4',
         'secondary-hover': '#13AD9A',
         'secondary-surface': '#E3F7F4',
-        'base': '#1A1F21',
+        'base-black': '#1A1F21',
         'subdued': '#595D62',
         'grey':{
           50: '#F2F2F2',
