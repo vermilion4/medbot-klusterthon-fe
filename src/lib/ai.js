@@ -33,11 +33,12 @@ export const getAIRecommendation = (data) => {
 
 /**
  * Get Symptoms
- * @param {string} keyword
+ * @param {object} filter
  * @returns {Promise}
  */
-export const getSymptoms = (keyword) => {
-  return appAxios.get(`/symptoms?keyword=${keyword}`);
+export const getSymptoms = (filter) => {
+  const query = queryBuilder(filter);
+  return appAxios.get(`/symptoms${query}`);
 }
 
 /**

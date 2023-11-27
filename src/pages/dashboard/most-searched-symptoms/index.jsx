@@ -2,6 +2,7 @@ import HealthCard from '@/components/Dashboard/Card';
 import { useRecommendation } from '@/context/reportContext';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { getSymptoms } from '@/lib/ai';
+import { openNotificationWithIcon } from '@/utils/helper';
 import { Skeleton } from 'antd';
 import { useEffect, useState } from 'react';
 
@@ -18,7 +19,7 @@ const searchActivity = () => {
   const getSymptomsHistory = async () => {
     setLoading(true);
     try {
-      const res = await getSymptoms();
+      const res = await getSymptoms({});
       if (res) {
         console.log(res)
         setActivity(res.data);

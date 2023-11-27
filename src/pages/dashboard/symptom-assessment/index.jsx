@@ -20,7 +20,7 @@ const SymptomAssessment = () => {
 
   const handleSearch = async (keyword) => {
     try {
-      const res = await getSymptoms(keyword);
+      const res = await getSymptoms({keyword});
       const uniqueValues = new Set(res.data.map((item) => item.keyword));
 
       // Create an array of objects with the 'value' property
