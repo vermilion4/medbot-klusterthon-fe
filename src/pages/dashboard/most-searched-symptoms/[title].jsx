@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 const ExpandSearchCauses = () => {
   const {query, back} = useRouter()
-  const {issue} = query
+  const {title} = query
   const tabitems = [
     {
       key: '1',
@@ -49,7 +49,7 @@ const ExpandSearchCauses = () => {
               href: '/dashboard/most-searched-symptoms'
             },
             {
-              title: `${issue}`,
+              title: `${title}`,
             },
           ]}
         />

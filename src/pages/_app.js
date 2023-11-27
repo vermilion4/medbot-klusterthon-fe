@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { SessionProvider } from "next-auth/react";
 import { ConfigProvider } from "antd";
 import { ReduxProvider } from "@/store/ReduxProvider";
+import { RecommendationProvider } from "@/context/reportContext";
 
 
 export default function App({
@@ -20,6 +21,9 @@ export default function App({
                 colorPrimaryHover: "#008FD1",
                 defaultBorderColor: "#0098DE",
                 defaultColor: "#1A1F21",
+                defaultHoverColor: "#0098DE",
+                defaultHoverBorderColor: "#0098DE",
+               
               },
               Tabs: {
                 inkBarColor: "#0098DE",
@@ -31,7 +35,9 @@ export default function App({
             },
           }}
         >
+          <RecommendationProvider>
           <Component {...pageProps} />
+          </RecommendationProvider>
         </ConfigProvider>
       </SessionProvider>
     </ReduxProvider>

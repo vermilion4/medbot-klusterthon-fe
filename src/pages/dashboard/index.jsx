@@ -14,7 +14,11 @@ const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
-    setIsModalOpen(true);
+    if (user?.createdAt === user?.updatedAt) {
+      setIsModalOpen(true);
+    } else {
+      push('/dashboard/symptom-assessment')
+    }
   };
 
   const handleCancel = () => {

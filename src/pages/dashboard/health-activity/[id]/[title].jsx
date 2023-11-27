@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 const ExpandCauses = () => {
   const { query, back } = useRouter();
-  const { issue, id } = query;
+  const { title, id } = query;
   const tabitems = [
     {
       key: '1',
@@ -53,7 +53,7 @@ const ExpandCauses = () => {
               href: `/dashboard/health-activity/${id}`,
             },
             {
-              title: `${issue}`,
+              title: `${title}`,
             },
           ]}
         />

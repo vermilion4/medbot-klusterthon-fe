@@ -96,6 +96,22 @@ body {
   font-weight: 500;
   color: #1A1F21
 }
+.ant-popover-content .ant-btn-primary{
+  background-color: #0098DE;
+  border-color: #0098DE;
+  color: #fff;
+  font-weight: 500;
+  width: 30%;
+  height: 32px;
+}
+.ant-popover-content .ant-btn-default{
+  width: 30%;
+  height: 32px;
+  font-weight: 500;
+}
+.ant-popover-inner{
+  width: 300px;
+}
 
 #print-only {
   display: none;

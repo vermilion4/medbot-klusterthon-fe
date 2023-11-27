@@ -42,3 +42,10 @@ export const openNotificationWithIcon = (
       break
   }
 }
+
+
+export const formattedDate = (timestamp) => {
+  const date = new Date(timestamp);
+  const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+};
