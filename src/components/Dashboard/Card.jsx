@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Button from '../shared/Button';
 
 const HealthCard = ({ activity, search, health, symptom, setShowComponent, setSymptom, index }) => {
-  const { id, title, recommendation, date, description, severity } = activity;
+  const { id, title, recommendation, date, description, severity } = activity || {};
   const handleNavigate = () =>{
     let navTo = null
     switch (navTo)

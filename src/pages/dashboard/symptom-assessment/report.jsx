@@ -17,7 +17,7 @@ const AssessmentReport = () => {
   const { recommendation } = useRecommendation();
   const {user} = useSelector(selectUser)
   const {push} = useRouter()
-  const { summary, symptom, symptoms, causes} = recommendation
+  const { summary, symptom, symptoms, causes} = recommendation || {}
   const componentRef = useRef(null);
 
   const handleMenuClick = (e) => {

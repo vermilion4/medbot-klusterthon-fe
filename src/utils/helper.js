@@ -43,7 +43,11 @@ export const openNotificationWithIcon = (
   }
 }
 
-
+/**
+ * formattedDate
+ * @param {date} timestamp
+ * @returns {dateFormat}
+ */
 export const formattedDate = (timestamp) => {
   const date = new Date(timestamp);
   const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
