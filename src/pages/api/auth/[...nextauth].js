@@ -19,7 +19,7 @@ export const authOptions = {
       name: "Credentials",
       credentials: {
         email: {
-          label: "Username:",
+          label: "Email:",
           type: "text",
         },
         password: {

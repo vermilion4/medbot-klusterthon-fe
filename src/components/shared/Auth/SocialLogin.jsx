@@ -9,7 +9,7 @@ const SocialLogin = () => {
         <p className='font-bold text-xs'>Or</p>
         <hr className='border border-grey-200 w-full' />
       </div>
-      <div className='p-4 flex justify-center relative border border-grey-200 rounded-lg mb-2'
+      <div className='cursor-pointer hover:bg-grey-200 transition-all duration-300 ease-in-out p-4 flex justify-center relative border border-grey-200 rounded-lg mb-2'
         onClick={()=>{
           signIn('google', { callbackUrl: '/dashboard' })
         }}

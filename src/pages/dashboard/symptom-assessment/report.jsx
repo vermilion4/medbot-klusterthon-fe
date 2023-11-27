@@ -38,14 +38,10 @@ const AssessmentReport = () => {
       key: '1',
       icon: <Image src={'/share.svg'} width={18} height={18} alt='icon' />,
     },
-    {
-      label: 'Delete Report',
-      key: '2',
-      icon: <Image src={'/delete.svg'} width={18} height={18} alt='icon' />,
-    },
+
     {
       label: 'Download Report',
-      key: '3',
+      key: '2',
       icon: <Image src={'/download.svg'} width={18} height={18} alt='icon' />,
       onClick: ()=>handlePrint,
     },
@@ -68,7 +64,7 @@ const AssessmentReport = () => {
         <div className='flex justify-between items-end mb-4'>
           <div>
             <h3 className='text-xl font-bold'>{symptom} Report</h3>
-            <p>{user?.firstName}{user?.gender ? <>,{' '}<span>{user?.gender}</span></> : ''}</p>
+            <p>{user?.firstName}{user?.gender ? <>,{' '}<span className='capitalize'>{user?.gender}</span></> : ''}</p>
           </div>
           <div className='flex gap-4'>
           <Dropdown menu={menuProps}>

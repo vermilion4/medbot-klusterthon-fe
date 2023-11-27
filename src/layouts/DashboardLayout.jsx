@@ -1,9 +1,11 @@
+import Privacy from '@/components/shared/Privacy';
+import Terms from '@/components/shared/Terms';
 import { bottomSidebar, sidebar } from '@/data/sidebar';
 import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 import { selectActiveNavigation, setActiveNavigation } from '@/store/appSlice';
 import { getUserProfile, selectUser } from '@/store/userSlice';
 import { setToken } from '@/utils/http';
-import { Layout, Menu, Skeleton } from 'antd';
+import { Layout, Menu, Skeleton, Dropdown } from 'antd';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -35,9 +37,49 @@ const DashboardLayout = ({ children }) => {
 
   const [loading, setLoading] = useState(true);
 
+  const [showTerms, setShowTerms] = useState(false)
+  const [showPrivacy, setShowPrivacy] = useState(false)
+  
+  const items = [
+    {
+      key: '1',
+      label: (
+        <div onClick={()=> setShowTerms(true)}>
+          Terms of Service
+        </div>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <div onClick={()=> setShowPrivacy(true)}>
+          Privacy Policy
+        </div>
+      ),
+    },
+  ];
+
+  const handleCancel = () =>{
+    setShowTerms(false)
+    setShowPrivacy(false)
+  }
+
   const handleMenuClick = (navTo, key) => {
     dispatch(setActiveNavigation(key));
     push(navTo);
+  };
+
+  const headerStyle = {
+    backgroundColor: '#FFF',
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'end',
+    alignItems: 'center',
+    paddingRight: `${isLargeScreen ? '86px' : '30px'}`,
+    gap: '12px',
+    borderBottom: '1px solid #F2F2F2',
+    position: 'fixed',
+    zIndex: 100,
   };
 
   const siderStyle = {
@@ -196,6 +238,26 @@ const DashboardLayout = ({ children }) => {
           MedBot AI should not be blindly trusted
         </Footer>
       </Layout>
+      <Dropdown menu={{ items }} placement='topLeft' arrow>
+        <Image
+          className='fixed bottom-10 right-5 md:right-20 cursor-pointer hover:scale-105 transition-all ease-in-out'
+          src='/question.svg'
+          width={44}
+          height={44}
+          alt='popup question'
+        />
+      </Dropdown>
+
+      {
+        showTerms && (
+          <Terms isModalOpen={showTerms} handleCancel={handleCancel}/>
+        )
+      }
+      {
+        showPrivacy && (
+          <Privacy isModalOpen={showPrivacy} handleCancel={handleCancel}/>
+        )
+      }
     </Layout>
   );
 };

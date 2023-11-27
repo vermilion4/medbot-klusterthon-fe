@@ -29,7 +29,7 @@ const HealthCard = ({ activity, search, health, symptom, setShowComponent, setSy
   return (
     <div className='px-7 h-[248px] py-5 rounded-xl shadow-lg border border-grey-50 flex flex-col items-start relative'>
       <div className='flex justify-between items-start text-start w-full'>
-        <div>
+        <div className='w-[80%]'>
           {
             health && (<div className='flex items-center gap-2 mb-[5.5px]'>
             <Image src='/activity.svg' width={14} height={14} alt='clock' />
@@ -37,7 +37,7 @@ const HealthCard = ({ activity, search, health, symptom, setShowComponent, setSy
           </div>)
           }
           <h3 className='text-xl font-bold line-clamp-2'>{title}</h3>
-          <p className={` ${severity === 'high' ? 'text-critical-100' : severity === 'mid' ? 'text-warning-100' : severity === 'low' ? 'text-success-100' : 'text-secondary'} text-sm mb-1`}>{recommendation}</p>
+          <p className={`line-clamp-1 ${severity === 'high' ? 'text-critical-100' : severity === 'mid' ? 'text-warning-100' : severity === 'low' ? 'text-success-100' : 'text-secondary'} text-sm mb-1`}>{recommendation}</p>
          
         </div>
         {

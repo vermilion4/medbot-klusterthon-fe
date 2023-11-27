@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      <div className='items-center mx-auto min-h-[90vh] grid place-content-center md:w-1/2 w-[60vw]'>
+      <div className='items-center mx-auto min-h-[80vh] grid place-content-center md:w-1/2 w-[60vw]'>
         <Image
           className='mx-auto mb-10'
           src={'logoIcon.svg'}

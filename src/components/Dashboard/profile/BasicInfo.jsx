@@ -118,11 +118,11 @@ const BasicInfo = () => {
   return (
     <div className='mb-12'>
       <div className='mb-6'>
-        <div className='flex justify-between items-center mb-4'>
+        <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-3 sm:gap-0'>
           <h3 className='font-bold text-lg'>Basic Information</h3>
           <Button
             outlined
-            className={'w-[40%]'}
+            className={'w-[60%] sm:w-[40%]'}
             text={'Save changes'}
             disabled={_.isEmpty(dirtyFields) || !isValid}
             clickFunction={handleClick}

@@ -3,7 +3,7 @@ import { formattedDate } from '@/utils/helper';
 import { useSelector } from 'react-redux';
 
 const Report = ({ componentRef, data }) => {
-  const { summary, symptom, symptoms, causes} = data
+  const { summary, symptom, symptoms, causes} = data || {}
   const { user } = useSelector(selectUser)
   return (
     <div
