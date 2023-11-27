@@ -6,7 +6,7 @@ import { openNotificationWithIcon } from '@/utils/helper';
 import { Skeleton } from 'antd';
 import { useEffect, useState } from 'react';
 
-const searchActivity = () => {
+const SearchActivity = () => {
 
   const [activity, setActivity] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -63,4 +63,4 @@ const searchActivity = () => {
   );
 };
 
-export default searchActivity;
+export default SearchActivity;
