@@ -76,44 +76,59 @@ const DashboardLayout = ({ children }) => {
     backgroundColor: '#FFF',
     textAlign: 'center',
     marginLeft: `${isLargeScreen ? '259px' : '80px'}`,
+    fontSize: '12px',
+    color: '#595D62'
   };
 
   useEffect(() => {
-    setLoading(false);
-  }, [isLargeScreen]);
+    async function getLoader() {
+      const { cardio } = await import('ldrs');
+      cardio.register();
+    }
+    getLoader();
+  }, []);
 
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     setToken(token);
     dispatch(getUserProfile());
   }, [dispatch]);
 
+  useEffect(() => {
+    setLoading(false);
+  }, [isLargeScreen]);
+
+
   if (loading) {
-    // You can render a loading spinner or some placeholder while the size is being determined
-    return <div>Loading...</div>;
+    return (
+      <div className='min-h-screen grid place-content-center'>
+        <l-cardio size='60' stroke='5' speed='1.5' color='#0098DE'></l-cardio>
+      </div>
+    );
   }
 
   return (
     <Layout>
-      <Sider
-        style={siderStyle}
-        breakpoint='lg'
-        collapsedWidth='80px'
-        onBreakpoint={(broken) => {
-          // console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          // console.log(collapsed, type);
-        }}>
+      <Sider style={siderStyle} breakpoint='lg' collapsedWidth='80px'>
         {isLargeScreen ? (
           <Image
             src={'/dashboardLogo.svg'}
             width={670}
             height={58}
             alt='logo'
+            onClick={() => push('/dashboard')}
+            className='cursor-pointer'
           />
         ) : (
-          <Image src={'/logoIcon.svg'} width={91} height={67} alt='logo' />
+          <Image
+            src={'/logoIcon.svg'}
+            width={91}
+            height={67}
+            alt='logo'
+            onClick={() => push('/dashboard')}
+            className='cursor-pointer'
+          />
         )}
 
         <Menu
@@ -126,7 +141,7 @@ const DashboardLayout = ({ children }) => {
               handleMenuClick(selectedItem.navTo, key);
             }
           }}
-          items={sidebar.map(({ id, title, icon, activeIcon }, index) => ({
+          items={sidebar.map(({ id, title, icon, activeIcon }) => ({
             key: id,
             label: title,
             icon: (
@@ -143,7 +158,7 @@ const DashboardLayout = ({ children }) => {
         <Menu
           style={{ ...menuStyle, borderBottom: 'none', marginTop: 0 }}
           mode='inline'
-          items={bottomSidebar.map(({ id, title, icon, navTo }, index) => ({
+          items={bottomSidebar.map(({ id, title, icon }) => ({
             key: id,
             label: title,
             icon: <Image src={icon} width={18} height={18} alt='icon' />,
@@ -156,14 +171,15 @@ const DashboardLayout = ({ children }) => {
       <Layout>
         <Header style={headerStyle}>
           {profileLoading ? (
-            <Skeleton.Button active 
-            shape={'square'}
-          
-            style={{
-              height: '2rem',
-             width: '150px',
-              marginTop: '20px',
-            }} />
+            <Skeleton.Button
+              active
+              shape={'square'}
+              style={{
+                height: '2rem',
+                width: '150px',
+                marginTop: '20px',
+              }}
+            />
           ) : (
             <>
               <div className='p-2 rounded-full bg-primary-surface text-black text-sm font-bold'>

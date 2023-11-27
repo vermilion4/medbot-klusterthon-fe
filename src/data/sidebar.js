@@ -25,7 +25,7 @@ export const sidebar = [
     icon: '/profile.svg',
     activeIcon: '/profile-active.svg',
     title: 'My Profile',
-    navTo: '#'
+    navTo: '/dashboard/profile'
   },
 ]
 
@@ -34,6 +34,5 @@ export const bottomSidebar = [
     id: '5',
     icon: '/logout.svg',
     title: 'Log out',
-    navTo: '#'
   },
 ]
