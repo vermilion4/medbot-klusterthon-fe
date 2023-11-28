@@ -1,4 +1,5 @@
 import HealthCard from '@/components/Dashboard/Card';
+import Empty from '@/components/Dashboard/Empty';
 import { useRecommendation } from '@/context/reportContext';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { getHealthAssessment } from '@/lib/ai';
@@ -36,7 +37,8 @@ const HealthActivity = () => {
       <div className='w-[75vw] px-5 overflow-x-hidden lg:w-[85%] mx-auto'>
         <h2 className='mb-1 text-start text-xl'>Health activities</h2>
         {loading ? (
-          [1, 2]?.map((item) => (
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+          {[1, 2]?.map((item) => (
             <Skeleton.Button
               key={item}
               active={true}
@@ -50,7 +52,12 @@ const HealthActivity = () => {
                 marginRight: '1rem',
               }}
             />
-          ))
+          ))}
+          </div>
+        ) : activity?.length === 0 ? (
+          <div className='flex justify-center'>
+          <Empty text='Perform a symptom assessment to see your health activities.' />
+          </div>
         ) : (
           <div className='py-5 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-[14px]'>
             {activity?.map((activity, index) => (
