@@ -63,6 +63,7 @@ const HealthActivity = () => {
             {activity?.map((activity, index) => (
               <HealthCard
                 key={index}
+                index={index + 1}
                 setRecommendationData={setRecommendationData}
                 activity={activity}
                 navTo={'health'}

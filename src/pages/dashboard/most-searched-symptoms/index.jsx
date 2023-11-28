@@ -60,7 +60,7 @@ const SearchActivity = () => {
         ) : (
           <div className='py-5 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-[14px]'>
           {activity?.map((activity, index) => (
-          <HealthCard key={index} activity={activity} setRecommendationData={setRecommendationData} search/>
+          <HealthCard key={index} index={index + 1} activity={activity} setRecommendationData={setRecommendationData} search/>
           ))}
         </div>
         )}

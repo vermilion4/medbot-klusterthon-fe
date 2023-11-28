@@ -5,7 +5,7 @@ import { formattedDate } from '@/utils/helper';
 
 const HealthCard = ({ activity,navTo, search, health, symptom, setShowComponent, setSymptom, index, setRecommendationData }) => {
   const {push} = useRouter()
-  const { id, title, recommendation, keyword, createdAt, description,summary, severity } = activity || {};
+  const { title, recommendation, keyword, createdAt, description,summary, severity } = activity || {};
   const handleNavigate = () =>{
     switch (navTo)
     {
@@ -42,13 +42,10 @@ const HealthCard = ({ activity,navTo, search, health, symptom, setShowComponent,
           </div>)
           }
           <h3 className='text-xl font-bold line-clamp-2'>{title}</h3>
-          <p className={`line-clamp-1 ${severity === 'high' ? 'text-critical-100' : severity === 'mid' ? 'text-warning-100' : severity === 'low' ? 'text-success-100' : 'text-secondary'} text-sm mb-1`}>{recommendation || keyword}</p>
+          <p className={`line-clamp-1 text-sm mb-1`}>{recommendation || keyword}</p>
          
         </div>
-        {
-          !search && !symptom && ((createdAt || !recommendation) ? <Image src='/trash.svg' width={18} height={18} alt='trash' /> : <div className='text-primary border border-primary rounded-full w-7 h-7 px-[9px] py-[2px]'>{index}</div>)
-        }
-        
+        <div className='text-primary border border-primary rounded-full w-7 h-7 px-[9px] py-[2px]'>{index}</div> 
       </div>
 
       <p className='text-subdued text-sm text-start line-clamp-3'>

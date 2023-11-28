@@ -168,6 +168,7 @@ const SymptomAssessment = () => {
             {symptomList?.map((activity, index) => (
               <HealthCard
                 key={index}
+                index={index + 1}
                 activity={activity}
                 setShowComponent={setShowAIQuestions}
                 setSymptom={setSymptom}

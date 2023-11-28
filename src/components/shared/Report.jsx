@@ -26,11 +26,11 @@ const Report = () => {
   });
 
   const items = [
-    {
-      label: 'Share Report',
-      key: '1',
-      icon: <Image src={'/share.svg'} width={18} height={18} alt='icon' />,
-    },
+    // {
+    //   label: 'Share Report',
+    //   key: '1',
+    //   icon: <Image src={'/share.svg'} width={18} height={18} alt='icon' />,
+    // },
 
     {
       label: 'Download Report',
