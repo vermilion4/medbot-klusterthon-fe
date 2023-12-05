@@ -13,7 +13,7 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useReactToPrint } from 'react-to-print';
 
-const Report = () => {
+const Report = ({source}) => {
   const { recommendation } = useRecommendation();
   const {user} = useSelector(selectUser)
   const {push, back} = useRouter()
@@ -88,7 +88,7 @@ const Report = () => {
         <h3 className='text-subdued font-medium mb-4'>Possible Causes</h3>
         <div className='py-5 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-[14px]'>
           {causes?.map((cause, index) => (
-          <HealthCard key={index} activity={cause} index={index + 1} />
+          <HealthCard key={index} activity={cause} index={index + 1} navTo={`${source === 'health' && 'healthCause'}`} />
           ))}
         </div>
         <h3 className='text-subdued font-medium mb-4 mt-[30px]'>Symptoms</h3>

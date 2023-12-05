@@ -55,7 +55,6 @@ const StepOne = () => {
       setStartRecording(true);
     }
 
-    console.log(userAnswers);
   }, [userAnswers, startRecording, currentQuestionIndex]);
 
   const updateProfile = async () => {
@@ -73,7 +72,6 @@ const StepOne = () => {
 
     try {
       const response = await updateUser(user?.id, basicInfoValues);
-      console.log(response);
     } catch (error) {
       openNotificationWithIcon(
         'error',
@@ -84,7 +82,6 @@ const StepOne = () => {
 
     try {
       const response = await updateUserHealth(healthInfoValues);
-      console.log(response);
       if (response) {
         openNotificationWithIcon(
           'success',

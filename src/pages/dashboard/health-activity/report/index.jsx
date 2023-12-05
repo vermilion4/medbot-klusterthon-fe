@@ -1,7 +1,7 @@
 import Report from '@/components/shared/Report';
 
 const AssessmentReport = () => {
-  return <Report />;
+  return <Report source={'health'} />;
 };
 
 export default AssessmentReport;

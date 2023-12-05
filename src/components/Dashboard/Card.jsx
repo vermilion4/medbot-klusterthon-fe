@@ -3,7 +3,7 @@ import Button from '../shared/Button';
 import { useRouter } from 'next/router';
 import { formattedDate } from '@/utils/helper';
 
-const HealthCard = ({ activity,navTo, search, health, symptom, setShowComponent, setSymptom, index, setRecommendationData }) => {
+const HealthCard = ({ activity,navTo, search, health, symptom, setShowComponent, setSymptom, index, setRecommendationData, source }) => {
   const {push} = useRouter()
   const { title, recommendation, keyword, createdAt, description,summary, severity } = activity || {};
   const handleNavigate = () =>{
@@ -11,6 +11,12 @@ const HealthCard = ({ activity,navTo, search, health, symptom, setShowComponent,
     {
       case 'health':
         navTo = `/dashboard/health-activity/report`
+        break;
+      case 'healthCause':
+        navTo = {
+          pathname: `/dashboard/health-activity/report/${title}`,
+          query: {description}
+        }
         break;
       default:
         navTo = {
@@ -29,7 +35,6 @@ const HealthCard = ({ activity,navTo, search, health, symptom, setShowComponent,
       setRecommendationData(activity)
     }
     push(navTo)
-    // push(navTo)
   }
   return (
     <div className='px-7 h-[248px] py-5 rounded-xl shadow-lg border border-grey-50 flex flex-col items-start relative'>
@@ -42,10 +47,10 @@ const HealthCard = ({ activity,navTo, search, health, symptom, setShowComponent,
           </div>)
           }
           <h3 className='text-xl font-bold line-clamp-2'>{title}</h3>
-          <p className={`line-clamp-1 text-sm mb-1`}>{recommendation || keyword}</p>
+          <p className={`line-clamp-1 text-sm mb-1 ${keyword && 'text-secondary'} ${recommendation && 'text-critical-100'}`}>{recommendation || keyword}</p>
          
         </div>
-        <div className='text-primary border border-primary rounded-full w-7 h-7 px-[9px] py-[2px]'>{index}</div> 
+        <div className='text-primary border border-primary rounded-full w-7 h-7 grid place-content-center'>{index}</div> 
       </div>
 
       <p className='text-subdued text-sm text-start line-clamp-3'>

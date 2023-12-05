@@ -19,7 +19,6 @@ const SymptomAssessment = () => {
   const [options, setOptions] = useState([]);
 
   const handleSearch = async (keyword) => {
-    console.log(keyword)
     try {
       const res = await getSymptoms({keyword});
       const uniqueValues = new Set(res.data.map((item) => item.keyword));

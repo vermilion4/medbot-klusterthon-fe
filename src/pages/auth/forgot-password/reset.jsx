@@ -31,7 +31,6 @@ const ResetPassword = () => {
         password: values.password
       }
       const response = resetPassword(data, token)
-      console.log(response)
       if (response) {
         openNotificationWithIcon('success', 'Reset password', 'Password reset successful');
         push('/auth/login')

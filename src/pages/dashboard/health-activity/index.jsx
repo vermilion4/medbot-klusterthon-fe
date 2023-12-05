@@ -3,34 +3,40 @@ import Empty from '@/components/Dashboard/Empty';
 import { useRecommendation } from '@/context/reportContext';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { getHealthAssessment } from '@/lib/ai';
+import { setActiveNavigation } from '@/store/appSlice';
 import { selectUser } from '@/store/userSlice';
 import { openNotificationWithIcon } from '@/utils/helper';
 import { Skeleton } from 'antd';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const HealthActivity = () => {
   const { user } = useSelector(selectUser);
   const [activity, setActivity] = useState([]);
   const [loading, setLoading] = useState(false);
   const { setRecommendationData } = useRecommendation();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getAllHealthReports();
-  }, []);
+    dispatch(setActiveNavigation('2'))
+  }, [user]);
 
   const getAllHealthReports = async () => {
     setLoading(true);
-    try {
-      const res = await getHealthAssessment(user?.id);
-      if (res) {
-        setActivity(res.data);
+    if (user) {
+      try {
+        const res = await getHealthAssessment(user?.id);
+        if (res) {
+          setActivity(res.data);
+        }
+      } catch (error) {
+        openNotificationWithIcon('error', 'Error', 'Something went wrong');
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      openNotificationWithIcon('error', 'Error', 'Something went wrong');
-    } finally {
-      setLoading(false);
     }
+
   };
   return (
     <DashboardLayout>

@@ -22,7 +22,6 @@ const SearchActivity = () => {
     try {
       const res = await getSymptoms({});
       if (res) {
-        console.log(res)
         setActivity(res.data);
       }
     } catch (error) {
