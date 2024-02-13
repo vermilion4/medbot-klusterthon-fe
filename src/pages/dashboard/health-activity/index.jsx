@@ -15,11 +15,11 @@ const HealthActivity = () => {
   const [activity, setActivity] = useState([]);
   const [loading, setLoading] = useState(false);
   const { setRecommendationData } = useRecommendation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getAllHealthReports();
-    dispatch(setActiveNavigation('2'))
+    dispatch(setActiveNavigation('2'));
   }, [user]);
 
   const getAllHealthReports = async () => {
@@ -28,7 +28,8 @@ const HealthActivity = () => {
       try {
         const res = await getHealthAssessment(user?.id);
         if (res) {
-          setActivity(res.data);
+          const reversedReports = res.data.reverse();
+          setActivity(reversedReports);
         }
       } catch (error) {
         openNotificationWithIcon('error', 'Error', 'Something went wrong');
@@ -36,33 +37,33 @@ const HealthActivity = () => {
         setLoading(false);
       }
     }
-
   };
+
   return (
     <DashboardLayout>
       <div className='w-[75vw] px-5 overflow-x-hidden lg:w-[85%] mx-auto'>
         <h2 className='mb-1 text-start text-xl'>Health activities</h2>
         {loading ? (
           <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-          {[1, 2]?.map((item) => (
-            <Skeleton.Button
-              key={item}
-              active={true}
-              size={'large'}
-              shape={'square'}
-              block={true}
-              style={{
-                height: '10rem',
-                marginTop: '1.8rem',
-                borderRadius: '1rem',
-                marginRight: '1rem',
-              }}
-            />
-          ))}
+            {[1, 2]?.map((item) => (
+              <Skeleton.Button
+                key={item}
+                active={true}
+                size={'large'}
+                shape={'square'}
+                block={true}
+                style={{
+                  height: '10rem',
+                  marginTop: '1.8rem',
+                  borderRadius: '1rem',
+                  marginRight: '1rem',
+                }}
+              />
+            ))}
           </div>
         ) : activity?.length === 0 ? (
           <div className='flex justify-center'>
-          <Empty text='Perform a symptom assessment to see your health activities.' />
+            <Empty text='Perform a symptom assessment to see your health activities.' />
           </div>
         ) : (
           <div className='py-5 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-[14px]'>
