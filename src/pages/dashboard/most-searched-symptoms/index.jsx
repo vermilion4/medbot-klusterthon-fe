@@ -21,7 +21,6 @@ const SearchActivity = () => {
     try {
       const res = await getSymptoms({});
       if (res) {
-        console.log(res)
         setActivity(res.data);
       }
     } catch (error) {
@@ -33,7 +32,7 @@ const SearchActivity = () => {
   return (
     <DashboardLayout>
       <div className='w-[75vw] px-5 overflow-x-hidden lg:w-[85%] mx-auto'>
-        <h2 className='mb-1 text-start text-xl'>Most Searched Symptoms</h2>
+        <h2 className='mb-1 text-xl text-start'>Most Searched Symptoms</h2>
         {loading ? (
           [1, 2]?.map((item) => (
             <Skeleton.Button

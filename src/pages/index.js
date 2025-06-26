@@ -4,6 +4,7 @@ import { intro } from '@/data/intro';
 import Slider from 'react-slick';
 import { DM_Sans } from 'next/font/google';
 import { useRouter } from 'next/router';
+import ServerStatus from '@/components/shared/ServerStatus';
 
 const sans = DM_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'] });
 const settings = {
@@ -25,6 +26,7 @@ export default function Home ()
     <main
       className={ `overflow-x-hidden relative flex flex-col items-center min-h-screen px-5 pt-10 ${ sans.className }` }
     >
+      <ServerStatus />
       <div>
         <div className='flex justify-center mb-7'>
           <Image
@@ -37,11 +39,11 @@ export default function Home ()
             onClick={()=>push('/')}
           />
         </div>
-        <div className='intro-slider mb-16'>
+        <div className='mb-16 intro-slider'>
           <Slider { ...settings } className='min-h-[150px]'>
             {
               intro?.map(({ id, title, description }) => (
-                <div key={ id } className='space-y-1 md:space-y-5 text-center'>
+                <div key={ id } className='space-y-1 text-center md:space-y-5'>
                   <h2 className='text-[22px] md:text-[44px] font-bold leading-[66px]'>{ title }</h2>
                   <p className='text-sm md:text-base'>{ description }</p>
                 </div>
@@ -49,13 +51,13 @@ export default function Home ()
             }
           </Slider>
         </div>
-        <div className='flex gap-4 justify-center w-full'>
+        <div className='flex justify-center w-full gap-4'>
           <Button routeTo='/auth/register' className={ 'w-[40%]' } primary text={ 'Sign Up' } />
           <Button routeTo='/auth/login' className={ 'w-[40%]' } outlined text={ 'Log in' } />
         </div>
       </div>
 
-      <Image src='/heroImage.svg' width={ 650 } height={ 386 } alt='decorative' className='hero absolute bottom-0 left-0 right-0 mx-auto' />
+      <Image src='/heroImage.svg' width={ 650 } height={ 386 } alt='decorative' className='absolute bottom-0 left-0 right-0 mx-auto hero' />
     </main>
   );
 }

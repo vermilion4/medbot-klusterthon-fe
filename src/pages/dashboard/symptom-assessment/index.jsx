@@ -19,7 +19,6 @@ const SymptomAssessment = () => {
   const [options, setOptions] = useState([]);
 
   const handleSearch = async (keyword) => {
-    console.log(keyword)
     try {
       const res = await getSymptoms({keyword});
       const uniqueValues = new Set(res.data.map((item) => item.keyword));
@@ -71,7 +70,6 @@ const SymptomAssessment = () => {
           setQuestionsList(response.data);
         }
       } catch (error) {
-        console.log(error);
       } finally {
         setQuestionsLoading(false);
       }
@@ -82,8 +80,8 @@ const SymptomAssessment = () => {
     <DashboardLayout>
       <div className='w-[75vw] px-5 overflow-x-hidden lg:w-[85%] mx-auto text-start'>
         {showAIQuestions ? (
-          <div className='flex items-center mb-4 gap-6'>
-            <h2 className='text-start text-xl'>New assessment</h2>
+          <div className='flex items-center gap-6 mb-4'>
+            <h2 className='text-xl text-start'>New assessment</h2>
             <Progress
               size={50}
               strokeColor='#FFB319'
@@ -92,7 +90,7 @@ const SymptomAssessment = () => {
             />
           </div>
         ) : (
-          <h2 className='mb-4 text-start text-xl'>
+          <h2 className='mb-4 text-xl text-start'>
             Let&lsquo;s start with the symptom that&lsquo;s troubling you the
             most
           </h2>

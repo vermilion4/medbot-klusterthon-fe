@@ -55,7 +55,6 @@ const StepOne = () => {
       setStartRecording(true);
     }
 
-    console.log(userAnswers);
   }, [userAnswers, startRecording, currentQuestionIndex]);
 
   const updateProfile = async () => {
@@ -73,7 +72,6 @@ const StepOne = () => {
 
     try {
       const response = await updateUser(user?.id, basicInfoValues);
-      console.log(response);
     } catch (error) {
       openNotificationWithIcon(
         'error',
@@ -84,7 +82,6 @@ const StepOne = () => {
 
     try {
       const response = await updateUserHealth(healthInfoValues);
-      console.log(response);
       if (response) {
         openNotificationWithIcon(
           'success',
@@ -126,8 +123,8 @@ const StepOne = () => {
                 : `Thank You, ${firstName}. I have enough info for now and can help you find out what’s going on. Just start a symptom assesment`}
             </div>
           </div>
-          <div className='mt-7 flex items-end flex-col'>
-            <div className='p-4 rounded-full bg-primary-surface text-black text-sm font-bold'>
+          <div className='flex flex-col items-end mt-7'>
+            <div className='p-4 text-sm font-bold text-black rounded-full bg-primary-surface'>
               <p className='uppercase'>{`${user?.firstName?.charAt(
                 0
               )}${user?.lastName?.charAt(0)}`}</p>

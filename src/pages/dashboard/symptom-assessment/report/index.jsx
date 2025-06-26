@@ -21,7 +21,7 @@ const AssessmentReport = () => {
   const componentRef = useRef(null);
 
   const handleMenuClick = (e) => {
-    console.log('click', e);
+    // console.log('click', e);
   };
 
   const handlePrint = useReactToPrint({
@@ -61,7 +61,7 @@ const AssessmentReport = () => {
           <Image src='/activity.svg' width={14} height={14} alt='clock' />
           <p className='text-subdued'>{formattedDate(Date.now())}</p>
         </div>
-        <div className='flex justify-between items-end mb-4'>
+        <div className='flex items-end justify-between mb-4'>
           <div>
             <h3 className='text-xl font-bold'>{symptom} Report</h3>
             <p>{user?.firstName}{user?.gender ? <>,{' '}<span className='capitalize'>{user?.gender}</span></> : ''}</p>
@@ -89,7 +89,7 @@ const AssessmentReport = () => {
         <h3 className='font-medium'>Summary</h3>
         <p>{summary}</p>
         </div>
-        <h3 className='text-subdued font-medium mb-4'>Possible Causes</h3>
+        <h3 className='mb-4 font-medium text-subdued'>Possible Causes</h3>
         <div className='py-5 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-[14px]'>
           {causes?.map((cause, index) => (
           <HealthCard key={index} activity={cause} index={index + 1} />

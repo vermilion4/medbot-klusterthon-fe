@@ -1,5 +1,6 @@
 import Privacy from '@/components/shared/Privacy';
 import Terms from '@/components/shared/Terms';
+import ServerStatus from '@/components/shared/ServerStatus';
 import { bottomSidebar, sidebar } from '@/data/sidebar';
 import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 import { selectActiveNavigation, setActiveNavigation } from '@/store/appSlice';
@@ -12,19 +13,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 const { Header, Footer, Sider, Content } = Layout;
-
-const headerStyle = {
-  backgroundColor: '#FFF',
-  display: 'flex',
-  width: '100%',
-  justifyContent: 'end',
-  alignItems: 'center',
-  paddingRight: '86px',
-  gap: '12px',
-  borderBottom: '1px solid #F2F2F2',
-  position: 'fixed',
-  zIndex: 100,
-};
 
 const DashboardLayout = ({ children }) => {
   const { user, loading: profileLoading } = useSelector(selectUser);
@@ -144,13 +132,15 @@ const DashboardLayout = ({ children }) => {
 
   if (loading) {
     return (
-      <div className='min-h-screen grid place-content-center'>
+      <div className='grid min-h-screen place-content-center'>
         <l-cardio size='60' stroke='5' speed='1.5' color='#0098DE'></l-cardio>
       </div>
     );
   }
 
   return (
+    <>
+    <ServerStatus />
     <Layout>
       <Sider style={siderStyle} breakpoint='lg' collapsedWidth='80px'>
         {isLargeScreen ? (
@@ -224,7 +214,7 @@ const DashboardLayout = ({ children }) => {
             />
           ) : (
             <>
-              <div className='p-2 rounded-full bg-primary-surface text-black text-sm font-bold'>
+              <div className='p-2 text-sm font-bold text-black rounded-full bg-primary-surface'>
                 <p className='uppercase'>{`${user?.firstName?.charAt(
                   0
                 )}${user?.lastName?.charAt(0)}`}</p>
@@ -240,7 +230,7 @@ const DashboardLayout = ({ children }) => {
       </Layout>
       <Dropdown menu={{ items }} placement='topLeft' arrow>
         <Image
-          className='fixed bottom-10 right-5 md:right-20 cursor-pointer hover:scale-105 transition-all ease-in-out'
+          className='fixed transition-all ease-in-out cursor-pointer bottom-20 right-5 hover:scale-105'
           src='/question.svg'
           width={44}
           height={44}
@@ -259,6 +249,7 @@ const DashboardLayout = ({ children }) => {
         )
       }
     </Layout>
+    </>
   );
 };
 

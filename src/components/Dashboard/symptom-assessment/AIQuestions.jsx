@@ -46,7 +46,7 @@ const AIQuestions = ({ symptom, questionsList, setPercent }) => {
         push('/dashboard/symptom-assessment/report');
       }
     } catch (error) {
-      console.log(error);
+      openNotificationWithIcon('error', 'AI Questions', error.message)
     } finally {
       setLoading(false);
     }
@@ -66,8 +66,8 @@ const AIQuestions = ({ symptom, questionsList, setPercent }) => {
                 : 'Don’t forget that this is not a medical diagnosis. If in doubt, it is always best to seek advice from a medical professional.'}
             </div>
           </div>
-          <div className='mt-7 flex items-end flex-col'>
-            <div className='p-4 rounded-full bg-primary-surface text-black text-sm font-bold'>
+          <div className='flex flex-col items-end mt-7'>
+            <div className='p-4 text-sm font-bold text-black rounded-full bg-primary-surface'>
               <p className='uppercase'>{`${user?.firstName?.charAt(
                 0
               )}${user?.lastName?.charAt(0)}`}</p>
