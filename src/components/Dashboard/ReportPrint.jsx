@@ -2,7 +2,7 @@ import { selectUser } from '@/store/userSlice';
 import { formattedDate } from '@/utils/helper';
 import { useSelector } from 'react-redux';
 
-const Report = ({ componentRef, data }) => {
+const ReportPrint = ({ componentRef, data }) => {
   const { summary, symptom, symptoms, causes} = data || {}
   const { user } = useSelector(selectUser)
   return (
@@ -64,4 +64,4 @@ const Report = ({ componentRef, data }) => {
   );
 };
 
-export default Report;
+export default ReportPrint;

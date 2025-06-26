@@ -95,7 +95,7 @@ const SymptomAssessment = () => {
             most
           </h2>
         )}
-        <div className='flex items-center mb-10 gap-10 lg:gap-[85px]'>
+        <div className='flex flex-wrap items-center mb-10 gap-10 lg:gap-[85px]'>
           <AutoComplete
             style={{
               width: '70%',
@@ -166,6 +166,7 @@ const SymptomAssessment = () => {
             {symptomList?.map((activity, index) => (
               <HealthCard
                 key={index}
+                index={index + 1}
                 activity={activity}
                 setShowComponent={setShowAIQuestions}
                 setSymptom={setSymptom}
